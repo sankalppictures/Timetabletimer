@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class 10 + JEE Timetable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(120deg, #1E3A8A, #2563EB, #60A5FA);
+            background-size: 400% 400%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #fff;
+            animation: gradientBG 10s infinite alternate;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        .timetable {
+            background: rgba(255, 165, 0, 0.3); /* Orange Transparent */
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 0 20px rgba(255, 165, 0, 0.8); /* Orange Glow */
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            font-size: 26px;
+            margin-bottom: 5px;
+        }
+        #clock {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>📅 Class 10 + JEE Timetable</h1>
+    <div id="clock">Loading time...</div>
+    <div class="timetable" id="timetable">
+        <p>Loading...</p>
+    </div>
+
+    <script>
+        function updateClock() {
+            let now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            let timeString = hours + ':' + minutes + ' ' + ampm;
+            document.getElementById("clock").innerText = "⏰ Current Time: " + timeString;
+        }
+
+        function updateTimetable() {
+            let now = new Date();
+            let hour = now.getHours();
+            let schedule = "";
+            let timeSlot = "";
+            
+            if (hour >= 5 && hour < 5.5) {
+                schedule = "🚿 Freshen Up (Brush, Nahana, Taiyari)";
+                timeSlot = "5:00 AM - 5:30 AM";
+            } else if (hour >= 5.5 && hour < 6) {
+                schedule = "📖 Morning Revision (कल का पढ़ा हुआ दोहराओ)";
+                timeSlot = "5:30 AM - 6:00 AM";
+            } else if (hour >= 6 && hour < 7) {
+                schedule = "📝 JEE Maths Practice (Basic & Moderate Questions)";
+                timeSlot = "6:00 AM - 7:00 AM";
+            } else if (hour >= 7 && hour < 7.5) {
+                schedule = "🍽 Breakfast Time";
+                timeSlot = "7:00 AM - 7:30 AM";
+            } else if (hour >= 7.5 && hour < 8) {
+                schedule = "📚 Science: Physics & Chemistry (Class 10)";
+                timeSlot = "7:30 AM - 8:00 AM";
+            } else if (hour >= 8 && hour < 13.5) {
+                schedule = "🏫 स्कूल टाइम (ध्यान से पढ़ो, क्लास में 50% सीख सकते हो)";
+                timeSlot = "8:00 AM - 1:30 PM";
+            } else if (hour >= 14 && hour < 15) {
+                schedule = "🍽 Lunch + आराम (थोड़ा रिलैक्स करो)";
+                timeSlot = "2:00 PM - 3:00 PM";
+            } else if (hour >= 15 && hour < 16) {
+                schedule = "🔬 JEE Physics (Concept & Problem Solving)";
+                timeSlot = "3:00 PM - 4:00 PM";
+            } else if (hour >= 16 && hour < 17) {
+                schedule = "🎮 Break + Play Time (शरीर भी फिट रहना चाहिए)";
+                timeSlot = "4:00 PM - 5:00 PM";
+            } else if (hour >= 17 && hour < 18) {
+                schedule = "📘 Science: Biology & Diagrams";
+                timeSlot = "5:00 PM - 6:00 PM";
+            } else if (hour >= 18 && hour < 19) {
+                schedule = "✍️ Maths: Class 10 Important Questions";
+                timeSlot = "6:00 PM - 7:00 PM";
+            } else if (hour >= 19 && hour < 20) {
+                schedule = "🎥 YouTube से Study (JEE + Class 10 Concept Videos)";
+                timeSlot = "7:00 PM - 8:00 PM";
+            } else if (hour >= 20 && hour < 20.5) {
+                schedule = "🍽 Dinner Time";
+                timeSlot = "8:00 PM - 8:30 PM";
+            } else if (hour >= 20.5 && hour < 21.5) {
+                schedule = "📝 Board के लिए लिखकर पढ़ाई + Sample Papers";
+                timeSlot = "8:30 PM - 9:30 PM";
+            } else if (hour >= 21.5 && hour < 22) {
+                schedule = "📚 NCERT Quick Revision (Highlight & Note Down)";
+                timeSlot = "9:30 PM - 10:00 PM";
+            } else {
+                schedule = "😴 सोने का समय! (कल फिर मेहनत करेंगे)";
+                timeSlot = "10:00 PM - 5:00 AM";
+            }
+            
+            document.getElementById("timetable").innerHTML = `<p><strong>${timeSlot}</strong></p><p>${schedule}</p>`;
+        }
+        
+        updateClock();
+        setInterval(updateClock, 1000);
+        updateTimetable();
+        setInterval(updateTimetable, 60000);
+    </script>
+</body>
+</html>
